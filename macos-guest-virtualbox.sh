@@ -299,7 +299,7 @@ elif [[ "$(cat /proc/sys/kernel/osrelease 2>/dev/null)" =~ WSL[2Gg] ]]; then  # 
         echo "is in the PATH variable."
         exit
     fi
-# Windows Subsystem for Linux (WSL "1") 
+# Windows Subsystem for Linux (WSL "1")
 elif [[ "$(cat /proc/sys/kernel/osrelease 2>/dev/null)" =~ [Mm]icrosoft ]]; then
     if [[ -n "$(VBoxManage.exe -v 2>/dev/null)" ]]; then
         function VBoxManage() {
@@ -450,6 +450,7 @@ if [[ -n "$( VBoxManage createvm --name "${vm_name}" --ostype "MacOS1013_64" --r
     VBoxManage createvm --name "${vm_name}" --ostype "MacOS1013_64" --register 2>/dev/tty
     exit
 fi
+VBoxManage modifyvm "${vm_name}" --cpuidset 00000001 000106e5 00100800 0098e3fd bfebfbff
 }
 
 function check_default_virtual_machine() {
